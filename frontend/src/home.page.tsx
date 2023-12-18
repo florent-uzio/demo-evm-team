@@ -15,7 +15,6 @@ import {
   useWaitForTransaction,
 } from "wagmi";
 import { FloNFT__factory } from "./typechain-types";
-import { useEffect, useState } from "react";
 
 const contractConfig = {
   address: "0xc35bC00163BDC97685b6b52285dee58B4b700F64",
@@ -24,7 +23,6 @@ const contractConfig = {
 
 export const HomePage = () => {
   const { isConnected } = useAccount();
-  const [totalMinted, setTotalMinted] = useState(0n);
 
   const { config: contractWriteConfig } = usePrepareContractWrite({
     ...contractConfig,
@@ -48,12 +46,6 @@ export const HomePage = () => {
     hash: mintData?.hash,
   });
 
-  useEffect(() => {
-    if (totalSupplyData) {
-      setTotalMinted(totalSupplyData);
-    }
-  }, [totalSupplyData]);
-
   const isMinted = txSuccess;
 
   return (
@@ -67,7 +59,7 @@ export const HomePage = () => {
         <Flex direction="column" gap={4}>
           <Flex gap={1} direction="column">
             <Heading level="1">EVM Sidechain Demo</Heading>
-            <Text>{Number(totalMinted)} minted so far!</Text>
+            <Text>{Number(totalSupplyData)} minted so far!</Text>
             <ConnectButton showBalance />
           </Flex>
 
