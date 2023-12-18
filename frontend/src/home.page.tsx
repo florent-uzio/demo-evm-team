@@ -6,7 +6,6 @@ import {
   Heading,
   PrimaryButton,
   TextButton,
-  Atom,
 } from "@ripple/design-system";
 import {
   useAccount,
